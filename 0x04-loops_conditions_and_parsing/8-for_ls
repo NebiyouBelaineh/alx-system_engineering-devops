@@ -2,8 +2,8 @@
 #This script displays the names of files in the current directory
 #+ in a list format where only ther part of the name after the first
 #+ dash is displayed
-
-for i in $(find . -type f | cut -d'-' -f2-)
+list=$(ls)
+for i in $list
 do
-	echo "$i"
+	echo "$i" | cut -d '-' -f2
 done
