@@ -1,3 +1,5 @@
 #!/usr/bin/env dash
 # This script groups vistors by IP and HTTP status and sorts them based on occurences
-awk '{print $1, $9}' apache-access.log | sort | uniq -c | sort -r
+file="apache-access.log"
+
+awk '{print $1, $9}' $file | sort | uniq -c | sort -r
