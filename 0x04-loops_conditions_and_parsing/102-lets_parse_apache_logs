@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# This script retrives the ip address as well as the HTTP_CODE from an apache log
+
+awk '{print $1, $9}' apache-access.log
