@@ -1,4 +1,4 @@
-#!/usr/bin/env dash
+#!/usr/bin/env bash
 # This script groups vistors by IP and HTTP status and sorts them based on occurences
 file=apache-access.log
 
