@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Contains solution for task 4
+netstat -lp
