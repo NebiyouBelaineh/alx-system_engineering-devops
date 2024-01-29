@@ -1,6 +1,8 @@
 # 1-distributed_web_infrastructure
 
 ## sketch img link:
+- https://drive.google.com/file/d/1GcSTYvcy_EG7yNMi9n6yUOeAqh8emlZf/view?usp=drive_link
+or
 - https://1drv.ms/i/s!AqlzPjfaKJlQhfAii-kJpDJZnjUEtw?e=D2fvLq
 ## For every additional element, why you are adding it
 - `Two servers`: We added two servers, add now we have three total servers capable of performing similar tasks. This means we can eliminate a single point of failure (SPOF) regarding having 1 web server, 1 application server and one database and also we have applied horizontal scaling to better handle the increase in incoming traffic.

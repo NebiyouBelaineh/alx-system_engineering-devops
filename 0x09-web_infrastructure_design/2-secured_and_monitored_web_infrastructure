@@ -1,6 +1,8 @@
 # 2-secured_and_monitored_web_infrastructure
 
 ## sketch img link:
+- https://drive.google.com/file/d/1Hy1698fNKPWVcFSC-wbpfLMdfao9Bn0_/view?usp=drive_link
+or
 - https://1drv.ms/i/s!AqlzPjfaKJlQhfAkwZVNgRjgwqFnmg?e=ifsnWa
 ## For every additional element, why you are adding it:
 - `3 firewalls`: These firewalls are added for adding security, monitoring, and control, acting as a barrier between a trusted internal network and untrusted external networks, filtering and managing incoming and outgoing network traffic. One firewall is placed before each server.
