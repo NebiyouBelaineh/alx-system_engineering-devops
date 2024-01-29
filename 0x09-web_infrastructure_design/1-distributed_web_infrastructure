@@ -1,0 +1,30 @@
+# 1-distributed_web_infrastructure
+
+## sketch img link:
+- https://1drv.ms/i/s!AqlzPjfaKJlQhfAii-kJpDJZnjUEtw?e=D2fvLq
+## For every additional element, why you are adding it
+- `Two servers`: We added two servers, add now we have three total servers capable of performing similar tasks. This means we can eliminate a single point of failure (SPOF) regarding having 1 web server, 1 application server and one database and also we have applied horizontal scaling to better handle the increase in incoming traffic.
+- `Load Balancer`: We added a load balancer to balance the load of requests between the two servers. This will enable the servers to work optimally.
+- `1 Web server`: allow us to eliminate single point of failure related to having just one Web server
+- `1 Application server`: allow us to eliminate a single point of failure related to having just one Application server.
+- `1 Database`: allow us to eliminate a single point of failure related to having just one database.
+
+## What distribution algorithm your load balancer is configured with and how it works
+- We used Round Robin, as a distribution algorithm for our load balancer. It works as it uses a sequential selection of request attribution as the first request goes to the first server and then the second request goes to the second server and so on. When requests are distributed to all servers, the next incoming request will start from the first server and the next will go to the second, and so on.
+
+## Is your load-balancer enabling an Active-Active or Active-Passive setup, explain the difference between both:
+- The difference between the active-active and active-passive load balancing is that the two servers will both actively share the load to serve the request and they will have ideally a shared database, but with the active-passive setup, one of the servers will be actively serving requests and the other server will be on standby mode in case the first server is down. In an active-passive setup, the servers have their dedicated database as each one will have their database but they will keep the integrity of the data by using synchronization mechanisms.
+
+## How a database Primary-Replica (Master-Slave) cluster works:
+- In a Primary-Replica (Master-Slave) database cluster, the primary server manages write operations, while replica servers replicate data from the primary and handle read operations, enhancing scalability, fault tolerance, and read performance.
+What is the difference between the Primary node and the Replica node in regard to the application?
+The Primary node typically hosts the main instance of the application and serves client requests.
+The Replica node duplicates the application environment for scalability and fault tolerance but may not handle client requests directly.
+
+## Issues:
+## Where are SPOF:
+- The load balancer represents single points of failure (SPOFs). If it fails, it could disrupt the entire system. During the design, we should consider redundancy or failover solutions to enhance reliability.
+## Security issues (no firewall, no HTTPS):
+- The absence of encryption poses significant security risks during data transmission. Additionally, servers are exposed to potential compromises without a firewall, making them susceptible to various attacks. 
+## No monitoring:
+The absence of monitoring complicates issue detection and resolution during system downtime. Monitoring is crucial for proactive identification of problems, ensuring timely responses, and facilitating effective system maintenance. We should implement monitoring tools to enhance system reliability and performance.

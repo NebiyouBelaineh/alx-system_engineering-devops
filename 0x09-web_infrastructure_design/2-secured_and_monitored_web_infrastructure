@@ -1,0 +1,30 @@
+# 2-secured_and_monitored_web_infrastructure
+
+## sketch img link:
+- https://1drv.ms/i/s!AqlzPjfaKJlQhfAkwZVNgRjgwqFnmg?e=ifsnWa
+## For every additional element, why you are adding it:
+- `3 firewalls`: These firewalls are added for adding security, monitoring, and control, acting as a barrier between a trusted internal network and untrusted external networks, filtering and managing incoming and outgoing network traffic. One firewall is placed before each server.
+- `1 SSL certificate` to serve www.foobar.com over HTTPS:
+SSL certification is added to enhance the communication security between servers and users by encrypting data. This encryption ensures the confidentiality and integrity of transmitted information, establishing trust in scenarios involving sensitive data and e-commerce transactions.
+- `3 monitoring clients` (data collector for Sumologic or other monitoring services): Monitoring clients are added to track the performance, health, and status of servers and applications. This helps identify issues, ensure optimal operation, and proactively address potential problems, improving overall system reliability and performance.
+
+## What are firewalls for:
+- Firewalls are security barriers that monitor and control incoming and outgoing network traffic, acting as a protective barrier between a trusted internal network and untrusted external networks. They are crucial for preventing unauthorized access, protecting against cyber threats, and ensuring network security.
+## Why is the traffic served over HTTPS:
+- Traffic is served over HTTPS to encrypt data transmitted between the user's browser and the web server, ensuring the confidentiality and integrity of the information. This encryption helps protect sensitive data from eavesdropping and tampering by malicious entities.
+## What monitoring is used for:
+- Monitoring is used to track system performance, detect issues, and ensure the reliability of IT infrastructure. It helps identify bottlenecks, prevent downtime, and optimize resource utilization for seamless operations.
+## How the monitoring tool is collecting data:
+- Monitoring tools collect data through various methods, including agent-based monitoring, SNMP (Simple Network Management Protocol), log file analysis, and API integrations.
+## Explain what to do if you want to monitor your web server QPS:
+- To monitor your web server's QPS (Queries Per Second), you can use monitoring tools that provide performance metrics. Set up monitoring software, configure it to track QPS metrics, and ensure it supports integration with your web server. Additionally, consider using built-in server logs or instrumentation for more detailed insights.
+
+## Issues:
+## Why terminating SSL at the load balancer level is an issue:
+- Terminating SSL at the load balancer can be an issue because it exposes decrypted traffic within the internal network. If proper security measures are not in place, sensitive information may be at risk during the communication between the load balancer and backend servers.
+
+## Why having only one MySQL server capable of accepting writes is an issue:
+- Having only one MySQL server capable of accepting writes can be problematic because it creates a single point of failure. If that server goes down or experiences issues, it can lead to data unavailability and disrupt the entire system. Additionally, it can limit the system's scalability and resilience.
+
+## Why having servers with all the same components (database, web server and application server) might be a problem: 
+- Having servers with all the same components may lead to a lack of diversity in the infrastructure. If a common issue or vulnerability affects one component, it could potentially impact all servers simultaneously, increasing the risk of widespread failures. Diversifying components can enhance system resilience.

@@ -1,0 +1,32 @@
+
+# 0-simple_web_stack
+
+## Sketch img link:
+- https://1drv.ms/i/s!AqlzPjfaKJlQhfAj5o2MPgXLax36zw?e=6J6dO6
+# What is a server?
+- In computing, a server is a computer or software that provides services or resources to other computers, known as clients, over a network. It responds to requests and is designed for reliability, continuous operation, and dedicated functions like hosting websites or managing data.
+
+# What is the role of the domain name
+- A domain name is a human-readable address that represents the numeric IP address of a computer on the Internet. It's used to easily identify and access websites or other resources. 
+
+# What type of DNS record www is in www.foobar.com
+- Canonical Name. 
+- Purpose: Resolve domain or subdomain to another domain.
+
+# What is the role of the web server:
+- A web server is responsible for handling HTTP requests from clients (like browsers) and serving web pages or other content in response. It manages the communication between clients and the hosted website or web application.
+
+# What is the role of the application server
+- An application server is responsible for executing and managing the application's business logic, ensuring communication between the user interface and the database, and supporting the application's overall functionality.
+
+# What is the role of the database
+- A database stores, organizes, and manages data. It provides a structured way to store and retrieve information, supporting various applications and ensuring data integrity.
+# What is the server using to communicate with the computer of the user requesting the website?
+- The server uses the Hypertext Transfer Protocol (HTTP) to communicate with the user's computer when requesting a website.
+# SPOF
+- SPOF stands for Single Point of Failure. Concerning the web infrastructure design, the components are prone to SPOF issues. Specifically, the Web Server, Application Server, and Database are all at risk; if any of these components fail, the whole infrastructure will fail.
+# Downtime when maintenance is needed (like deploying new code web server needs to be restarted)
+- When we need to provide an update to one of the components we need to shut down the hole
+System. This will mean the service will be interrupted until the update is completed. 
+# Cannot scale if too much incoming traffic
+- We have 1 server containing the web server, application server, and database. This means we may have 1 request entertained at a time. This will cause delays in the service the server provides.
