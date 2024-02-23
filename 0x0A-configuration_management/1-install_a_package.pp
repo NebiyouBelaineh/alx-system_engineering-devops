@@ -1,7 +1,17 @@
-# Script that installs flask from pip3
-# Version must be 2.1.0
-exec { 'install_flask':
-    command => '/usr/bin/pip3 install flask==2.1.0',
-    path    => ['/usr/bin'],
-    creates => '/usr/local/lib/python3.8/dist-packages/flask', # Adjust the path based on your Python environment
-  }
+# Puppet script that installs flask
+
+package { 'python3-pip':
+  ensure => 'installed',
+}
+
+package { 'flask':
+  ensure   => '2.1.0',
+  provider => 'pip3',
+  require  => Package['python3-pip'],
+}
+
+package { 'werkzeug':
+  ensure   => '2.1.1',
+  provider => 'pip3',
+  require  => Package['python3-pip'],
+}
