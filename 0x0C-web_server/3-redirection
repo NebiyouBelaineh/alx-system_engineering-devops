@@ -3,4 +3,25 @@
 # to respect below requirements
 # 	The redirection must be a “301 Moved Permanently”
 
-sed -i '/location \/redirect_me {/a \ \ \ \ return 301 http:\/\/www.youtube.com\/;' /etc/nginx/sites-available/default
+# Check for updates
+apt-get -y update
+
+# Installs nginx
+apt -y install nginx
+
+# Add firewall for HTTP
+ufw allow 'Nginx HTTP'
+
+# Add firewall for OpenSSH
+ufw allow 'OpenSSH'
+
+# Enable the firewall
+ufw enable
+
+# Changes the root page to contain the stril 'Hello World!'
+echo "Hello World!" > /var/www/html/index.nginx-debian.html
+
+sed -i "/server_name _;$/a\ \ \ \ \ \ \ \ rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;" /etc/nginx/sites-available/default
+
+# Start the nginx service
+service nginx start
