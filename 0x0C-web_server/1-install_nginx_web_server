@@ -1,14 +1,23 @@
 #!/usr/bin/env bash
 # Bash script that configures an Ubuntu machine to respect below requirements
 
+# Check for updates
+apt-get -y update
+
 # Installs nginx
-sudo apt -y install nginx
+apt -y install nginx
 
 # Add firewall for HTTP
-sudo ufw allow 'Nginx HTTP'
+ufw allow 'Nginx HTTP'
+
+# Enable the firewall
+ufw enable
 
 # Add firewall for OpenSSH
-sudo ufw allow 'OpenSSH'
+# ufw allow 'OpenSSH'
 
 # Changes the root page to contain the stril 'Hello World!'
 echo "Hello World!" > /var/www/html/index.nginx-debian.html
+
+# Start the nginx service
+service nginx start
