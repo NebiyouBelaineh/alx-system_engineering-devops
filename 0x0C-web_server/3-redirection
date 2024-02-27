@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Bash script containing commands to automatically configure a Ubuntu machine
+# to respect below requirements
+# 	The redirection must be a “301 Moved Permanently”
+
+sed -i '/location \/redirect_me {/a \ \ \ \ return 301 http:\/\/www.youtube.com\/;' /etc/nginx/sites-available/default
