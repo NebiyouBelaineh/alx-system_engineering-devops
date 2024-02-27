@@ -4,5 +4,11 @@
 # Installs nginx
 sudo apt -y install nginx
 
+# Add firewall for HTTP
+sudo ufw allow 'Nginx HTTP'
+
+# Add firewall for OpenSSH
+sudo ufw allow 'OpenSSH'
+
 # Changes the root page to contain the stril 'Hello World!'
 echo "Hello World!" > /var/www/html/index.nginx-debian.html
