@@ -10,16 +10,16 @@ apt-get -y update
 apt -y install nginx
 
 # Add firewall for HTTP
-ufw allow 'Nginx HTTP'
+# ufw allow 'Nginx HTTP'
 
 # Add firewall for OpenSSH
-ufw allow 'OpenSSH'
+# ufw allow 'OpenSSH'
 
 # Enable the firewall
-ufw enable
+# ufw enable
 
 # Changes the root page to contain the stril 'Hello World!'
-echo "Hello World!" > /var/www/html/index.nginx-debian.html
+echo "Hello World!" > /var/www/html/index.html
 
 sed -i "/server_name _;$/a\ \ \ \ \ \ \ \ rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;" /etc/nginx/sites-available/default
 
