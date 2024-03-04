@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+# This script is used to install HAProxy to new Ubuntu server to work as a load balancer
+
+apt-get install -y --no-install-recommends software-properties-common
+add-apt-repository -y ppa:vbernat/haproxy-2.8
+apt-get install -y haproxy=2.8.\*
+
+# Create configuration
+config="
+
+frontend main
+        bind *:80
+        default_backend web_servers
+
+backend web_servers
+        balance roundrobin
+        server 465573-web-01 3.80.19.87:80 check
+        server 465573-web-02 100.26.142.144:80 check
+
+"
+printf %s "$config" >> /etc/haproxy/haproxy.cfg
+
+printf "
+ENABLED=1
+" >> /etc/default/haproxy
+service haproxy restart
