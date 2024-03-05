@@ -2,9 +2,10 @@
 # This script is used to install HAProxy to new Ubuntu server to work as a load balancer
 
 apt-get -y update
-apt-get install -y --no-install-recommends software-properties-common
-add-apt-repository -y ppa:vbernat/haproxy-2.8
-apt-get install -y haproxy=2.8.\*
+apt-get -y install haproxy
+# apt-get install -y --no-install-recommends software-properties-common
+# add-apt-repository -y ppa:vbernat/haproxy-2.6
+# apt-get install -y haproxy=2.6.\*
 
 # Create configuration
 config="
@@ -12,13 +13,12 @@ config="
 frontend main
         bind *:80
         default_backend web_servers
-	http-response add-header Connection keep-alive
-	http-request add-header Connection keep-alive
 
 backend web_servers
         balance roundrobin
-        server 465573-web-01 3.80.19.87:80 check
-        server 465573-web-02 100.26.142.144:80 check
+        option http-keep-alive
+        server 493245-web-01 34.207.237.37:80 check
+        server 493245-web-02 35.175.65.10:80 check
 
 "
 printf %s "$config" >> /etc/haproxy/haproxy.cfg
@@ -26,4 +26,6 @@ printf %s "$config" >> /etc/haproxy/haproxy.cfg
 printf "
 ENABLED=1
 " >> /etc/default/haproxy
+
+# Restart haproxy
 sudo systemctl restart haproxy
