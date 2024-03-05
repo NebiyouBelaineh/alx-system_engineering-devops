@@ -1,26 +1,36 @@
-# Script to install nginx and configure it on a new ubuntu server using Puppet
-
-package {'nginx':
+# Ensure Nginx package is present
+package { 'nginx':
   ensure => 'present',
 }
 
-exec {'install_nginx':
-  command  => 'sudo apt-get -y update ; sudo apt-get -y install nginx',
-  provider => shell,
-
+# Update package repositories and install Nginx
+exec { 'install_nginx':
+  command     => 'apt-get -y update && apt-get -y install nginx',
+  path        => '/usr/bin',  # Specify the path to ensure proper execution
+  refreshonly => true,        # Only run when notified
+  subscribe   => Package['nginx'],  # Subscribe to the 'nginx' package
 }
 
-exec {'Hello World':
-  command  => 'echo "Hello World!" > /var/www/html/index.nginx-debian.html',
-  provider => shell,
+# Create the Hello World index page
+file { '/var/www/html/index.nginx-debian.html':
+  ensure  => 'file',
+  content => 'Hello World!',
+  notify  => Exec['restart_nginx'],  # Notify to restart Nginx when the file changes
 }
 
-exec {'Handle redirect_me':
-  command  => 'sudo sed -i "53i\location =  /redirect_me { return 301 http://youtube.com;}" /etc/nginx/sites-enabled/default',
-  provider => shell,
+# Configure the redirect_me location in Nginx
+exec { 'handle_redirect_me':
+  command     => 'sed -i "53i\location = /redirect_me { return 301 http://youtube.com;}" /etc/nginx/sites-enabled/default',
+  path        => '/bin:/usr/bin',  # Specify the path to ensure proper execution
+  refreshonly => true,           # Only run when notified
+  subscribe   => Package['nginx'],  # Subscribe to the 'nginx' package
+  notify      => Exec['restart_nginx'],  # Notify to restart Nginx when the configuration changes
 }
 
-exec {'restart_nginx':
-  command  => 'sudo service nginx restart',
-  provider => shell,
+# Restart Nginx service
+exec { 'restart_nginx':
+  command     => '/usr/sbin/service nginx restart',
+  path        => '/usr/sbin:/usr/bin:/sbin:/bin',  # Specify the path to ensure proper execution
+  refreshonly => true,  # Only run when notified
+  subscribe   => Package['nginx'],  # Subscribe to the 'nginx' package
 }
