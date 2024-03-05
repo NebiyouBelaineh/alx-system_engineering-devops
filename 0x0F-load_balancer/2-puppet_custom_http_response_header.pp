@@ -4,13 +4,14 @@ exec {'update':
   command => '/usr/bin/apt-get update',
 }
   package {'nginx':
-  ensure => 'present',
+  ensure => 'installed',
 }
 file_line { 'http_header':
-  path  => '/etc/nginx/nginx.conf',
-  match => 'http {',
-  line  => "http {\n\tadd_header X-Served-By \"${HOSTNAME}\";",
+  path   => '/etc/nginx/nginx.conf',
+  line   => "http {\n\tadd_header X-Served-By \$HOSTNAME;",
+  match  => 'http {',
 }
 exec {'run':
-  command => '/usr/sbin/service nginx restart',
+  command => '/usr/sbin/service nginx stop && /usr/sbin/service nginx start',
+  path    => '/bin:/usr/bin:/usr/sbin',
 }
