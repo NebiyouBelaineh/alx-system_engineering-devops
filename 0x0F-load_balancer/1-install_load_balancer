@@ -29,4 +29,4 @@ ENABLED=1
 " >> /etc/default/haproxy
 
 # Restart haproxy
-sudo systemctl restart haproxy
+service haproxy restart
