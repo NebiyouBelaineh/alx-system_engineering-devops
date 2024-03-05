@@ -1,17 +1,19 @@
 #!/usr/bin/env bash
 # This script is used to install HAProxy to new Ubuntu server to work as a load balancer
 
-apt-get -y update
-apt-get -y install haproxy
+sudo apt-get -y update
+sudo apt-get -y install haproxy
 # apt-get install -y --no-install-recommends software-properties-common
 # add-apt-repository -y ppa:vbernat/haproxy-2.6
 # apt-get install -y haproxy=2.6.\*
 
 # Create configuration
-config="
+config=\
+"
 
 frontend main
         bind *:80
+	mode http
         default_backend web_servers
 
 backend web_servers
