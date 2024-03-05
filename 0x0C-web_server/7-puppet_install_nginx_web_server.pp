@@ -1,65 +1,26 @@
-# Update package list
-exec { 'apt-update':
-  command     => '/usr/bin/apt-get -y update',
-  refreshonly => true,
-  before      => Package['nginx'],
+# Script to install nginx and configure it on a new ubuntu server using Puppet
+
+package {'nginx':
+  ensure => 'present',
 }
 
-# Install Nginx
-package { 'nginx':
-  ensure => installed,
+exec {'install_nginx':
+  command  => 'sudo apt-get -y update ; sudo apt-get -y install nginx',
+  provider => shell,
+
 }
 
-# Ensure Nginx service is running
-service { 'nginx':
-  ensure  => running,
-  enable  => true,
-  require => Package['nginx'],
+exec {'Hello World':
+  command  => 'echo "Hello World!" > /var/www/html/index.nginx-debian.html',
+  provider => shell,
 }
 
-# Define the content for the default server configuration
-$server_config = "
-server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-
-    root /var/www/html;
-    index index.html;
-
-    server_name _;
-
-    location / {
-        try_files \$uri \$uri/404;
-        return 301 /redirected;
-    }
-
-    location = /redirected {
-        rewrite ^ https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;
-    }
-
-    location /404 {
-        return 404;
-    }
-}"
-
-# Create the Nginx default server configuration file
-file { '/etc/nginx/sites-available/default':
-  ensure  => file,
-  content => $server_config,
-  notify  => Service['nginx'],
+exec {'sudo sed -i "s/listen 80 default_server;/listen 80 default_server;\\n\\tlocation \/redirect_me {\\n\\t\\t
+return 301 https:\/\/youtube.com\/;\\n\\t}/" /etc/nginx/sites-enabled/default':
+  provider => shell,
 }
 
-# Create the Hello World index.html file
-file { '/var/www/html/index.html':
-  ensure  => present,
-  content => 'Hello World!',
-}
-
-# Ensure Nginx listens on port 80
-file_line { 'listen_on_port_80':
-  ensure  => present,
-  path    => '/etc/nginx/sites-available/default',
-  line    => 'listen 80;',
-  before  => 'server_name _;',
-  require => Package['nginx'],
+exec {'restart_nginx':
+  command  => 'sudo service nginx restart',
+  provider => shell,
 }
