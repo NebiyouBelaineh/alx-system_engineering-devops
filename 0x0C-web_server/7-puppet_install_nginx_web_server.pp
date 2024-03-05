@@ -16,7 +16,7 @@ exec {'Hello World':
 }
 
 exec {'Handle redirect_me':
-  command  => 'sudo sed -i "53i\location =  /redirect_me { return 301 http://youtube.com;}" /etc/nginx/sites-enabled/default'
+  command  => 'sudo sed -i "53i\location =  /redirect_me { return 301 http://youtube.com;}" /etc/nginx/sites-enabled/default',
   provider => shell,
 }
 
