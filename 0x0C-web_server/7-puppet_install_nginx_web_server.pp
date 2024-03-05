@@ -20,7 +20,7 @@ file { '/var/www/html/index.nginx-debian.html':
 
 # Configure the redirect_me location in Nginx
 exec { 'handle_redirect_me':
-  command     => 'sed -i "53i\location = /redirect_me { return 301 http://youtube.com;}" /etc/nginx/sites-enabled/default',
+  command     => 'sed -i "/server_name _;$/a\ \ \ \ \ \ \ \ rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;" /etc/nginx/sites-available/default',
   path        => '/bin:/usr/bin',  # Specify the path to ensure proper execution
   refreshonly => true,           # Only run when notified
   subscribe   => Package['nginx'],  # Subscribe to the 'nginx' package
