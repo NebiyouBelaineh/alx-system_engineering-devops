@@ -21,7 +21,12 @@ apt -y install nginx
 # Changes the root page to contain the stril 'Hello World!'
 echo "Hello World!" > /var/www/html/index.html
 
-sed -i "/server_name _;$/a\ \ \ \ \ \ \ \ rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;" /etc/nginx/sites-available/default
+sudo sed -i '53i\location =  /redirect_me { return 301 http://youtube.com;}' /etc/nginx/sites-enabled/default
 
 # Start the nginx service
-service nginx start
+# Start the nginx service
+if [ "$(pgrep nginx)" ]; then
+        service nginx restart
+else
+        service nginx start
+fi
