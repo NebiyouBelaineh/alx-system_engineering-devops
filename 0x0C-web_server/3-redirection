@@ -16,7 +16,7 @@ echo "Hello World!" > /var/www/html/index.html
 ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 
 # Handle /redirect_me
-sudo sed -i '53i\location =  /redirect_me { return 301 http://youtube.com;}' /etc/nginx/sites-available/default
+sed -i "/server_name _;$/a\ \ \ \ \ \ \ \ rewrite ^/redirect_me https://www.youtube.com/ permanent;" /etc/nginx/sites-available/default
 
 # Start the nginx service
 if [ "$(pgrep nginx)" ]; then
