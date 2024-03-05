@@ -9,18 +9,19 @@ apt-get -y update
 # Installs nginx
 apt -y install nginx
 
+# Add firewall for HTTP
+ufw allow 'Nginx HTTP'
+
+# Add firewall for OpenSSH
+ufw allow 'OpenSSH'
+
+# Enable the firewall
+ufw enable
+
 # Changes the root page to contain the stril 'Hello World!'
-echo "Hello World!" > /var/www/html/index.html
+echo "Hello World!" > /var/www/html/index.nginx-debian.html
 
-# Create symboliclink between sites-available and sites-enabled
-ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-
-# Handle /redirect_me
-sed -i "/server_name _;$/a\ \ \ \ \ \ \ \ rewrite ^/redirect_me https://www.youtube.com/ permanent;" /etc/nginx/sites-available/default
+sed -i "/server_name _;$/a\ \ \ \ \ \ \ \ rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;" /etc/nginx/sites-available/default
 
 # Start the nginx service
-if [ "$(pgrep nginx)" ]; then
-        service nginx restart
-else
-        service nginx start
-fi
+service nginx start
