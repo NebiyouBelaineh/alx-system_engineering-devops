@@ -2,4 +2,4 @@
 # Bash script that configures an Ubuntu machine to use nginx to listen on port 80
 apt-get -y update
 apt -y install nginx
-service nginx start
+service nginx restart
