@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 # Bash script that configures an Ubuntu machine to use nginx to listen on port 80
 ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-service nginx stop
+service nginx stop > /dev/null
