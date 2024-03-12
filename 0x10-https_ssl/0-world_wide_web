@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# Bash script that will display information about subdomains.
+
+domain_info () {
+if [ $# -lt 2 ]; then # This means if only domain is provided
+	subdomains=("www" "lb-01" "web-01" "web-02")
+
+	for sub in "${subdomains[@]}"; do
+		# shellcheck disable=SC2086
+		sub_domain=$(dig "$sub".$1 | grep -i -A1 'ANSWER SECTION' | awk 'NR==2') 
+		# shellcheck disable=SC2086
+		rec_type=$(echo $sub_domain | awk '{print $4}')
+		# shellcheck disable=SC2086
+		ip_add=$(echo $sub_domain | awk '{print $5}')
+		echo "The subdomain $sub is a $rec_type record and points to $ip_add"
+	done
+else
+	# shellcheck disable=SC2086
+	sub_domain=$(dig $2.$1 | grep -i -A1 'ANSWER SECTION' | awk 'NR==2')
+	# shellcheck disable=SC2086
+	rec_type=$(echo $sub_domain | awk '{print $4}')
+	# shellcheck disable=SC2086
+	ip_add=$(echo $sub_domain | awk '{print $5}')
+	echo "The subdomain $2 is a $rec_type record and points to $ip_add"
+fi
+}
+domain_info "$@"
