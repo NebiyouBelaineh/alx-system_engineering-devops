@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+su - nginx -c 'service nginx start'
