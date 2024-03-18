@@ -1,2 +1,3 @@
 #!/usr/bin/env bash
-su - nginx -c 'service nginx start'
+sed -i '23i\ \n\tlisten 8080;' /etc/nginx/sites-available/default
+service nginx restart
