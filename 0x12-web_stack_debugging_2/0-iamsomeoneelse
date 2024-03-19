@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+# Bash Script that accepts 1 argument and runs the 'whoami' command with the passed argument as the user
 if [ $# -eq 0 ]; then
 	whoami
 	exit 0
