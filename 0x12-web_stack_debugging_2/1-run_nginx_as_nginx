@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Run nginx with nginx user and listen on port 8080
 if ! grep -q "^nginx:" /etc/passwd ; then
         sudo adduser --system --no-create-home --disabled-login --group nginx
 fi
