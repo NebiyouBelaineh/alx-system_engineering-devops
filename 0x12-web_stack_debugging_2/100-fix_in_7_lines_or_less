@@ -2,5 +2,6 @@
 # Run nginx with nginx user and listen on port 8080
 pkill -f apache2
 sed -i 's/user www-data/user nginx/' /etc/nginx/nginx.conf
-sed -i '23i\ \tlisten 8080;' /etc/nginx/sites-available/default
+sed -i 's/80/8080/' /etc/nginx/sites-available/default
+chmod 644 /etc/nginx/nginx.conf
 sudo service nginx restart
