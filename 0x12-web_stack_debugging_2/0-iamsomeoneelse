@@ -4,4 +4,4 @@ if [ $# -eq 0 ]; then
 	whoami
 	exit 0
 fi
-su - "$1" -c 'whoami'
+su - "$1" -s /bin/bash -c 'whoami'
