@@ -1,15 +1,8 @@
 #!/usr/bin/env bash
 #Run nginx with nginx user and listen on port 8080
 
-# check if port 8080 is being used
-port_pid=$(netstat -tulnp | grep ':8080' | awk '{print $7}' | cut -d/ -f2)
-if [ -n "$port_pid" ]; then
-        sudo pkill -f "$port_pid"
-fi
-if ! grep -q "^nginx:" /etc/passwd ; then
-        sudo adduser --system --no-create-home --disabled-login --group nginx
-fi
-sed -i 's/user www-data/user nginx/' /etc/nginx/nginx.conf
-sed -i 's/80/8080/g' /etc/nginx/sites-available/default
+sed -i "s/#user www-data/user nginx/" /etc/nginx/nginx.conf
+sed -i "s/80/8080/g" /etc/nginx/sites-available/default
 chmod 644 /etc/nginx/nginx.conf
-sudo service nginx restart
+pkill apache2
+sudo -u nginx service nginx start
