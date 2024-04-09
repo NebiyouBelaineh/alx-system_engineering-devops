@@ -13,9 +13,10 @@ def top_ten(subreddit):
     headers = requests.utils.default_headers()
     headers['User-Agent'] = 'My User Agent 0.0.1'
 
-    res = requests.get(url, headers=headers, allow_redirects=False).json()
-    top_ten = res.get('data', {}).get('children', None)
-    if not top_ten:
-        print(None)
-    for top in top_ten:
-        print(top.get('data').get('title'))
+    res = requests.get(url, headers=headers, allow_redirects=False)
+    if res.status_code != 200:
+        print('None')
+    else:
+        top_ten = res.json().get('data', {}).get('children')
+        for top in top_ten:
+            print(top.get('data').get('title'))
