@@ -17,15 +17,14 @@ def recurse(subreddit, hot_list=[], after='after'):
     headers = requests.utils.default_headers()
     headers['User-Agent'] = 'My User Agent 0.0.1'
 
-    res = requests.get(url, headers=headers, allow_redirects=False).json()
-    resp = res.get('data', {}).get('children', None)
-
-    if not resp:
+    res = requests.get(url, headers=headers, allow_redirects=False)
+    if res.status_code != 200:
         return None
+    resp = res.json().get('data', {}).get('children', None)
 
     for r in resp:
         hot_list.append(r.get('data').get('title'))
-    after = res.get('data').get('after')
+    after = res.json().get('data').get('after')
 
     if not after:
         return hot_list
