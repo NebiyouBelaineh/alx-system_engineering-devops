@@ -13,18 +13,16 @@ def count_words(subreddit, word_list, word_count={}, after=None):
     url = f"https://www.reddit.com/r/{subreddit}/hot.json"
     headers = requests.utils.default_headers()
     headers['User-Agent'] = 'My User Agent 0.0.1'
-    
-    res = requests.get(url, params={"after": after},
-                        headers=headers, allow_redirects=False)
+
+    res = requests.get(url, params={"after": after}, headers=headers,
+                       allow_redirects=False)
     if res.status_code != 200:
         return None
 
     resp = res.json()
 
-    hot_list = [child.get("data").get("title")
-             for child in resp
-             .get("data")
-             .get("children")]
+    hot_list = [child.get("data").get("title") for child in (resp.get("data")
+                                                             .get("children"))]
     if not hot_list:
         return None
 
