@@ -14,3 +14,7 @@
 *main*
 *.txt
 *__pycache__*
+*dashboard_list.py
+*datadog_host.json
+*response.json
+*test_datadog
