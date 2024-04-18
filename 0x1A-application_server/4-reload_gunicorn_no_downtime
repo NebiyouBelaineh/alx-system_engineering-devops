@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 # Script that kills the gunicorn worker processes gracefully
-pkill -HUP gunicorn
+ps aux | grep [g]unicorn | awk '{ print $2 }' | xargs kill -HUP
